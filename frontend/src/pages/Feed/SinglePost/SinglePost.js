@@ -27,7 +27,7 @@ class SinglePost extends Component {
 
   componentDidMount() {
     const postId = this.props.match.params.postId;
-    fetch('http://localhost:8080/feed/post/' + postId, {
+    fetch('http://43.201.111.137:8080/feed/post/' + postId, {
       headers: {
         Authorization: 'Bearer ' + this.props.token
       }
@@ -42,7 +42,7 @@ class SinglePost extends Component {
         this.setState({
           title: resData.post.title,
           author: resData.post.creator.name,
-          image: 'http://localhost:8080/' + resData.post.imageUrl,
+          image: 'http://43.201.111.137:8080/' + resData.post.imageUrl,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
           content: resData.post.content,
         });
@@ -51,7 +51,7 @@ class SinglePost extends Component {
         console.log(err);
       });
     // fetch comments
-    fetch('http://localhost:8080/comment/' + postId, {
+    fetch('http://43.201.111.137:8080/comment/' + postId, {
       headers: {
         Authorization: 'Bearer ' + this.props.token
       }
@@ -75,7 +75,7 @@ class SinglePost extends Component {
       .catch(err => {
         console.log(err);
       });
-    fetch('http://localhost:8080/comment/' + this.props.match.params.postId, {
+    fetch('http://43.201.111.137:8080/comment/' + this.props.match.params.postId, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + this.props.token,
@@ -90,7 +90,7 @@ class SinglePost extends Component {
     .catch(err => {console.log(err)});
     
     // socket
-    this.socket = openSocket('http://localhost:8080');
+    this.socket = openSocket('http://43.201.111.137:8080');
     this.socket.on('comment', data => {
       if (data.action === 'create') {
         this.addComment(data.comment);
@@ -125,7 +125,7 @@ class SinglePost extends Component {
     };
     const postId = this.props.match.params.postId;
     const comment = document.getElementById('comment').value;
-    fetch('http://localhost:8080/comment/' + postId, {
+    fetch('http://43.201.111.137:8080/comment/' + postId, {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + this.props.token,

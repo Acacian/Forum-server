@@ -80,7 +80,7 @@ class Feed extends Component {
       };
     });
   };
-
+ 
   loadPosts = direction => {
     if (direction) {
       this.setState({ postsLoading: true, posts: [] });
